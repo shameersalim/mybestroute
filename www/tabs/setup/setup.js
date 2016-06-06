@@ -27,6 +27,10 @@ function SetupController($rootScope, $scope, $log, $cordovaLocalNotification, $i
 
   };
 
+  $scope.notifyMe = function() {
+    $scope.scheduleNotificationFiveSecondsFromNow();
+  };
+
   $scope.rbTempChangeHandler = function(tempFormat) {
     $rootScope.temperatureFormat = tempFormat;
     if (tempFormat === 'farenheit') {
@@ -36,6 +40,7 @@ function SetupController($rootScope, $scope, $log, $cordovaLocalNotification, $i
     }
     saveData();
     dispatchTemperatureChangeEvent();
+
   };
 
   function saveData() {
@@ -45,15 +50,15 @@ function SetupController($rootScope, $scope, $log, $cordovaLocalNotification, $i
   $ionicPlatform.ready(function() {
     $scope.scheduleNotificationFiveSecondsFromNow = function() {
       var now = new Date().getTime();
-      var _5SecondsFromNow = new Date(now + 5000);
+      var _5SecondsFromNow = new Date(now + 10000);
 
       $cordovaLocalNotification.schedule({
         id: 2,
         date: _5SecondsFromNow,
-        text: 'Notification After 5 Seconds Has Been Triggered',
-        title: 'After 5 Seconds'
+        text: 'Notification After 10 Seconds Has Been Triggered',
+        title: 'After 10 Seconds'
       }).then(function() {
-        alert("Notification After 5 seconds set");
+        alert("Notification After 10 seconds set");
       });
     };
   });
